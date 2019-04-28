@@ -188,6 +188,16 @@ button {
   background-color: rgb(197, 63, 63);
 }
 
+.btn__options {
+  width: 70px;
+  height: 33px;
+  font-size: 0.7rem;
+}
+
+.btn__options:hover {
+  
+}
+
 /* Form Styles */
 .newHabit, .daily-check-in {
   color: #203f49;

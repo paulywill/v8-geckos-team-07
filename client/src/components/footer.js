@@ -11,7 +11,7 @@ const Footer = (props) => {
                     <span role="img" aria-label="heart emoji">
                         ❤️
             </span>{' '}
-                    <a href="https://blog.bitsrc.io/react-oauth-authentication-with-firebase-dfe0e8c5d0d4" target="_blank" rel="noopener noreferrer">Esau Silva</a>
+                    <a href="https://chingu.io/" target="_blank" rel="noopener noreferrer">Chingu</a>!
                 </p>
             </div>
 
