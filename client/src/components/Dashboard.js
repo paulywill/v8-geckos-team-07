@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Layout from '../containers/Layout';
+//import Layout from '../containers/Layout';
 import SocialProfileList from './SocialProfileList';
-import { auth } from '../firebase';
+//import { auth } from '../firebase';
 import HeaderLoggedIn from '../containers/HeaderLoggedIn';
 import NewHabit from './NewHabit';
 import CheckIn from './check-in';
@@ -20,17 +20,6 @@ class Dashboard extends Component {
     };
 
     state = {
-        buttonList: {
-            google: {
-                visible: true,
-                provider: () => {
-                    const provider = auth.googleOAuth();
-                    provider.addScope('profile');
-                    provider.addScope('email');
-                    return provider;
-                }
-            }
-        },
         providerData: this.props.providerData,
         newEntry: false,
         newEntryButton: true,
@@ -41,6 +30,7 @@ class Dashboard extends Component {
         habitExist: false,
     };
 
+    /*
     componentDidMount = () => {
         this.updateProviders(this.state.providerData);
         const user = this.state.providerData
@@ -58,6 +48,7 @@ class Dashboard extends Component {
 
     }
 
+
     handleCurrentProviders = providerData => {
         this.updateProviders(providerData);
     };
@@ -73,6 +64,7 @@ class Dashboard extends Component {
         this.setState({ buttonList, providerData });
     };
 
+    /*
     handleUnlinkedProvider = (providerName, providerData) => {
         if (providerData.length < 1) {
             auth
@@ -87,6 +79,7 @@ class Dashboard extends Component {
 
         this.setState({ buttonList, providerData });
     };
+     
 
     updateButtonList = (buttonList, providerName, visible) => ({
         ...buttonList,
@@ -95,6 +88,8 @@ class Dashboard extends Component {
             visible
         }
     });
+    */
+
 
     handleNewHabit = () => {
         this.setState({newEntry: true})
@@ -144,33 +139,15 @@ class Dashboard extends Component {
         }
 
         return (
-            <div>
-                <HeaderLoggedIn {...this.state} hamburgerToggle={this.hamburgerToggle} >
-                <div id="header">
-                <SocialProfileList
-                    auth={auth.getAuth}
-                    providerData={this.state.providerData}
-                    unlinkedProvider={this.handleUnlinkedProvider} />
-                <NewHabit data={this.state.providerData} 
-                    handleNewHabitSubmit={this.handleNewHabitSubmit} 
-                    newEntry={this.state.newEntry} />
-                {checkInComp}
-
-                <button
-                    className="btn__logout"
-                    onClick={() => auth.getAuth().signOut()}>
-                    Logout
-                </button>        
-            </div>
-
-            </HeaderLoggedIn>
-            <Layout {...this.state}>
+            <div id="content-wrap">
+                <main {...this.state}>
+            
                 <h2>Daily Dashboard</h2>
                 {newHabitButton}
                 {checkInButton}
                 <Progress />
                 <CurrentHabit {...this.state.habitData} />
-            </Layout>
+                </main>
             </div>
         );
     }

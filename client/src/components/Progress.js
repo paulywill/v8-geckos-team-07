@@ -7,7 +7,7 @@ class Progress extends Component {
     render() {
         return ( 
             <div>
-                <CalHM />    
+                {/* <CalHM /> */}   
             </div>
         )
     }

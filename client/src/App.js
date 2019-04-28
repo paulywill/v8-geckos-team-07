@@ -1,6 +1,5 @@
 // React core.
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 // Firebase.
 import firebase from 'firebase/app';
@@ -11,7 +10,18 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import styles from './index.css'; // This uses CSS modules.
 import './firebaseui-styling.global.css'; // Import globally.
 
+//Components
+import Header from './components/Header';
+//import HeaderSignedIn from './components/HeaderSignedIn';
+import Footer from './components/Footer';
+import Dashboard from './components/Dashboard';
+
+
+
+
+
 // Get the Firebase config from the auto generated file.
+// *** REMOVED : just using auth from Firebase
 
 // Instantiate a Firebase app.
 const firebaseApp = firebase.initializeApp({
@@ -61,19 +71,30 @@ class App extends Component {
      
       <div className={styles.container}>
         
-        <div className={styles.caption}>This is a cool demo app</div>
+        
+
+
         {this.state.isSignedIn !== undefined && !this.state.isSignedIn &&
+          //Not signed-in yet
           <div>
+            <Header />  
             <StyledFirebaseAuth className={styles.firebaseUi} uiConfig={this.uiConfig}
               firebaseAuth={firebaseApp.auth()} />
+            <Footer />
           </div>
         }
+
         {this.state.isSignedIn &&
-          <div className={styles.signedIn}>
-            Hello {firebaseApp.auth().currentUser.displayName}. You are now signed In!
-            <a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a>
+          //Signed in
+          <div className={styles.signedIn} id="content-wrap">
+            <Header />
+            <Dashboard />
+          <button><a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a></button>
+            <Footer /> 
           </div>
         }
+      
+      
       </div>
 
 
