@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import Layout from '../containers/Layout';
 import SocialButtonList from './SocialButtonList';
 import { auth } from '../firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+// import './firebaseui-styling.global.css'; // Import globally.
+
 import Header from '../components/header';
+
+
 
 const buttonList = {
   google: {
