@@ -6,6 +6,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 // import './firebaseui-styling.global.css'; // Import globally.
 
 import Header from '../components/header';
+import Footer from '../components/footer';
 
 
 
@@ -34,9 +35,20 @@ class Login extends Component {
     return (
       <div>
         <Header />
-        <Layout className="circle">  
+        <div className="circle">
+            <h2>A simple way to measure whether you did a habit.</h2>
+            <ol>
+              <li>Sign in using Google</li>
+              <li>Create a habit to track</li>
+              <li>Check in to relfect and log your&nbsp;progress</li>
+              <li>Review your data to help you along your journey</li>
+            </ol>
+
+            <p>Happy Tracking!</p>
+
           <SocialButtonList buttonList={buttonList} auth={auth.getAuth}/>
-        </Layout>
+        </div>
+        <Footer />
       </div>
     );
   }

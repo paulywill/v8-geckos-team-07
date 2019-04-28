@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const UserSettings = () => (
-    <div>
+import Layout from '../containers/Layout';
 
-        <header className="App-header">
-            <h1>Habit Tracker</h1>
-        </header>
-        <main>
-            <h2>User Settings</h2>
-        </main>
-    </div>
-);
+class UserSettings extends Component {
+    
+    render() {
+        return (
+            <Layout>
+                <h2>User Settings </h2>
+                <p>Ability to change data about habit?</p>
+                <p>Button to unlink google account</p>
+                <p>Button to delete data from database</p>
+
+                <Link to="/Dashboard">Back to Dashboard</Link>
+
+            </Layout>
+        )
+    }
+}
+
 export default UserSettings;

@@ -5,21 +5,13 @@ const Footer = (props) => {
 
         <footer id="footer">
 
-            <div id="special_thanks">
-                <p>
-                    Thank you {' '}
-                    <span role="img" aria-label="heart emoji">
-                        ❤️
-            </span>{' '}
-                    <a href="https://chingu.io/" target="_blank" rel="noopener noreferrer">Chingu</a>!
-                </p>
-            </div>
-
+            <p>Chingu Voyage 8
+                <span role="img" aria-label="heart emoji"> ❤️</span>
+                <a href="https://github.com/chingu-voyages/v8-geckos-team-07" target="_blank" rel="noopener noreferrer">Gecko Team 7 Project</a>
+            </p>
 
         </footer>
     );
 }
 
 export default Footer;
-
-
