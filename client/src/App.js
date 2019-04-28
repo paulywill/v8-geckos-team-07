@@ -13,11 +13,11 @@ import './firebaseui-styling.global.css'; // Import globally.
 
 //Components
 import Header from './components/Header';
+import Login from './components/Login';
+
 //import HeaderSignedIn from './components/HeaderSignedIn';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
-
-
 
 // Get the Firebase config from the auto generated file.
 // *** REMOVED : just using auth from Firebase
@@ -54,7 +54,6 @@ class App extends Component {
   };
 
   
-
   /**
    * @inheritDoc
    */
@@ -82,14 +81,11 @@ class App extends Component {
     return (
      
       <div className={styles.container}>
-        
-        
-
-
         {this.state.isSignedIn !== undefined && !this.state.isSignedIn &&
           //Not signed-in yet
           <div>
-            <Header />  
+            <Header />
+            <Login />
             <StyledFirebaseAuth className={styles.firebaseUi} uiConfig={this.uiConfig}
               firebaseAuth={firebaseApp.auth()} />
             <Footer />
@@ -104,22 +100,8 @@ class App extends Component {
           <button><a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a></button>
             <Footer /> 
           </div>
-        }
-      
-      
+        }   
       </div>
-
-
-
-      /* => TESTING: NOT FOR PROD
-      <Router>
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route {...this.state} path="/dashboard" component={withAuthentication(Dashboard)} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </Router>
-      */
     );
   }
 }
