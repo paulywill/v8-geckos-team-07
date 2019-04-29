@@ -12,19 +12,19 @@ class Dashboard extends Component {
         newEntry: false,
         newEntryButton: true,
         habitData: [],
-        user: "",
         hamburgerOpen: false,
         checkIn: false,
         habitExist: false,
-        data: [],
     };
 
     
     componentDidMount = () => {
-        /*
+       /*
+        this.setState({ user: user[0].email })
+ 
         const user = this.state.providerData
         this.setState({ user: user[0].email })
-     
+      
         axios.get('/api/habits/first-habit/' + user[0].email)
             .then(res => 
                 this.setState({ habitData: res.data.data }, () => {
