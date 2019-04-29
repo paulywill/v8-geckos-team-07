@@ -88,7 +88,6 @@ class Dashboard extends Component {
 
                 <main>
                     <h1>Hello, {this.props.displayName}!</h1>
-
                     <p>Have a habit? : {this.state.habitExist.toString()}</p>
                    
                     {this.state.habitExist && 
