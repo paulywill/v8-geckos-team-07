@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 class Dashboard extends Component {
    
 
-    componentDidUpdate() {
-        if (this.props.email != undefined && this.props.email) {
+    componentDidUpdate(prevProps) {
+        if (this.props.email != undefined && this.props.email !== prevProps.email) {
             // Do what you want with email
             console.log(this.props.email)
         }
