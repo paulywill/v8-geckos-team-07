@@ -17,15 +17,13 @@ class Dashboard extends Component {
         habitExist: false
     };
 
-
+    //open check in form
     handleCheckIn = () => {
-
-
-    }    
-
-    componentDidMount(){
-        console.log("did Mount: this.state.habitExist: " + this.state.habitExist)
+        this.setState((prevState) => ({
+            checkIn: !prevState.checkIn
+        }))
     }
+
 
     //used componentDidUpdate due to async nature of firebase/props
     componentDidUpdate(prevProps) {
@@ -35,10 +33,7 @@ class Dashboard extends Component {
             console.log("Dashboard - email is: " + user)
             
             axios.get('/api/habits/first-habit/' + user)
-                .then(res =>
-                    
-                    
-                    
+                .then(res =>                
                     this.setState({ habitData: res.data.data }, () => {
                         this.state.habitData ? this.setState({
                             newEntry: false, newEntryButton: false,
@@ -50,29 +45,6 @@ class Dashboard extends Component {
                 .catch(error =>
                     console.log(error)
                 )
-
-            console.log("Didupdate this.state.habitExist: " + this.state.habitExist)
-
-
-            if (this.state.habitExist) {
-                let checkInComp = <CheckIn checkIn={this.state.checkIn}
-                    habitId={this.state.habitData._id}
-                    handleCheckIn={this.handleCheckIn}
-                    handleCheckInSubmit={this.handleCheckInSubmit} />;
-                let checkInButton = <button className='habitButton' onClick={this.handleCheckIn}>Check In</button>
-                console.log("checkInComp: " + checkInComp)
-                console.log("checkInButton: " + checkInButton)
-
-            } else {
-                let checkInComp = null;
-                let checkInButton = null;
-                console.log("checkInComp: " + checkInComp)
-                console.log("checkInButton: " + checkInButton)
-            }
-
-                    
-
-
         }
     }
 
@@ -101,46 +73,34 @@ class Dashboard extends Component {
         }))
     }
 
-    render()  {
-        let newHabitButton = null
-        if (this.state.newEntryButton) {
-            newHabitButton = <button className='habitButton' onClick={this.handleNewHabit} >Create New Habit</button>
-        } else {
-            newHabitButton = null
-        }
-
-        
-        
-        
-        
-
-        
+    render()  {       
         return (
-            <div>
-
-                
+            <div>           
                 <NewHabit email={this.props.email}
                     handleNewHabitSubmit={this.handleNewHabitSubmit}
                     newEntry={this.state.newEntry} />
-                {/* checkInComp*/}
+
+                <CheckIn checkIn={this.state.checkIn}
+                    habitId={this.state.habitData._id}
+                    handleCheckIn={this.handleCheckIn}
+                    handleCheckInSubmit={this.handleCheckInSubmit} />;
+            
+
                 <main>
                     <h1>Hello, {this.props.displayName}!</h1>
 
                     <p>Have a habit? : {this.state.habitExist.toString()}</p>
                    
                     {this.state.habitExist && 
-                    <button className='habitButton' onClick={this.handleCheckIn}>Check In</button>}
+                        <button className='habitButton' onClick={this.handleCheckIn}>Check In</button>
+                    }
                     
+                    {!this.state.habitExist &&
+                        <button className='habitButton' onClick={this.handleNewHabit} >Create New Habit</button>
+                    }
 
                     <h2>Daily Dashboard</h2>
 
-
-
-
-
-
-                    {newHabitButton}
-                    {/* checkInButton */}
                     <Progress />
                     <CurrentHabit {...this.state.habitData} />
                 </main>
