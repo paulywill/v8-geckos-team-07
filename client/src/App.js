@@ -79,7 +79,9 @@ class App extends Component {
             <Dashboard 
               displayName={this.state.displayName} 
               email={this.state.email} />
-            <button><a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a></button>
+            <button>
+              <a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a>
+            </button>
             <Footer /> 
           </div>
         }   

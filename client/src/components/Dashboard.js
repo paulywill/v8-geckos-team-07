@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import NewHabit from './NewHabit';
+//import NewHabit from './NewHabit';
 import CheckIn from './CheckIn';
 import CurrentHabit from './CurrentHabit';
 import Progress from './Progress';
@@ -20,7 +20,7 @@ class Dashboard extends Component {
 
     //used componentDidUpdate due to async nature of firebase/props
     componentDidUpdate(prevProps) {
-        if (this.props.email != undefined && this.props.email !== prevProps.email) {
+        if (this.props.email !== undefined && this.props.email !== prevProps.email) {
             // Do what you want with email
             const user = this.props.email
             console.log("email is: " + user)
