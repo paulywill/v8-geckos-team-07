@@ -29,9 +29,7 @@ class Dashboard extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.email !== undefined && this.props.email !== prevProps.email) {
             // Do what you want with email
-            const user = this.props.email
-            console.log("Dashboard - email is: " + user)
-            
+            const user = this.props.email            
             axios.get('/api/habits/first-habit/' + user)
                 .then(res =>                
                     this.setState({ habitData: res.data.data }, () => {
@@ -76,26 +74,27 @@ class Dashboard extends Component {
     render()  {       
         return (
             <div>           
-                <NewHabit email={this.props.email}
-                    handleNewHabitSubmit={this.handleNewHabitSubmit}
-                    newEntry={this.state.newEntry} />
-
-                <CheckIn checkIn={this.state.checkIn}
-                    habitId={this.state.habitData._id}
-                    handleCheckIn={this.handleCheckIn}
-                    handleCheckInSubmit={this.handleCheckInSubmit} />;
-            
-
                 <main>
                     <h1>Hello, {this.props.displayName}!</h1>
                     <p>Have a habit? : {this.state.habitExist.toString()}</p>
                    
                     {this.state.habitExist && 
-                        <button className='habitButton' onClick={this.handleCheckIn}>Check In</button>
+                        <div>
+                            <button className='habitButton' onClick={this.handleCheckIn}>Check In</button> 
+                            <CheckIn checkIn={this.state.checkIn}
+                                habitId={this.state.habitData._id}
+                                handleCheckIn={this.handleCheckIn}
+                                handleCheckInSubmit={this.handleCheckInSubmit} />
+                        </div>
                     }
                     
                     {!this.state.habitExist &&
-                        <button className='habitButton' onClick={this.handleNewHabit} >Create New Habit</button>
+                        <div>
+                            <button className='habitButton' onClick={this.handleNewHabit} >Create New Habit</button> 
+                            <NewHabit email={this.props.email}
+                                handleNewHabitSubmit={this.handleNewHabitSubmit}
+                                newEntry={this.state.newEntry} />
+                        </div>
                     }
 
                     <h2>Daily Dashboard</h2>
