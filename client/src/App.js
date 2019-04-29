@@ -28,8 +28,7 @@ class App extends Component {
   state = {
     isSignedIn: undefined,
     displayName: undefined,
-    email: undefined,
-    photoURL: undefined,
+    email: undefined
   };
 
 
@@ -48,7 +47,9 @@ class App extends Component {
       this.setState({ isSignedIn: !!user });
       //User is signed in.
       console.info('User is signed in.');
-      this.setState({providerData: user.providerData})   
+      this.setState({providerData: user.providerData}) 
+      this.setState({ displayName: user.providerData[0].displayName })  
+      this.setState({ email: user.providerData[0].email })   
     });
   }
 
@@ -75,7 +76,9 @@ class App extends Component {
           //Signed in
           <div className={styles.signedIn} id="content-wrap">
             <Header providerData={this.state.providerData} />
-            <Dashboard providerData={this.state.providerData} />
+            <Dashboard 
+              displayName={this.state.displayName} 
+              email={this.state.email} />
             <button><a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a></button>
             <Footer /> 
           </div>
