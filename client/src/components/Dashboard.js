@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import Layout from '../containers/Layout';
 import SocialProfileList from './SocialProfileList';
-//import { auth } from '../firebase';
 import axios from 'axios';
-import HeaderLoggedIn from '../containers/HeaderLoggedIn';
 import NewHabit from './NewHabit';
 import CheckIn from './check-in';
 import CurrentHabit from './CurrentHabit';
