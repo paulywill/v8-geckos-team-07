@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import NewHabit from './NewHabit';
-import CheckIn from './check-in';
+import CheckIn from './CheckIn';
 import CurrentHabit from './CurrentHabit';
 import Progress from './Progress';
 
