@@ -65,8 +65,9 @@ class NewHabit extends Component {
     }
 
     handleExitClick = () => {
-        this.props.handleNewHabitSubmit();
-        this.setState({habit: '', smart: [], length: '', intervals: ''})
+        console.log("this.props.handleNewHabitSubmit();: " + this.props.handleNewHabitSubmit())
+        //this.props.handleNewHabitSubmit();
+        //this.setState({habit: '', smart: [], length: '', intervals: ''})
     }
 
     render(){

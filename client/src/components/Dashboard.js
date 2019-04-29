@@ -34,12 +34,10 @@ class Dashboard extends Component {
                 .then(res =>                
                     this.setState({ habitData: res.data.data }, () => {
                         this.state.habitData ? this.setState({
-                            newEntry: false, newEntryButton: false,
-                            habitExist: true
+                            newEntry: false, newEntryButton: false
                         }) : this.setState({ newEntry: true, newEntryButton: true, habitExist: false })
                     })
-                )
-                        
+                )        
                 .catch(error =>
                     console.log(error)
                 )
@@ -50,7 +48,7 @@ class Dashboard extends Component {
         this.setState({ newEntry: true })
     }
     handleNewHabitSubmit = (data) => {
-        this.setState({ newEntry: false, habitExist: true, newEntryButton: false, habitData: data });
+        this.setState({ newEntry: false, newEntryButton: false, habitData: data });
     }
 
     handleCheckInSubmit = () => {
