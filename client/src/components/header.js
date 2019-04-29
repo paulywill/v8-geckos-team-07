@@ -25,7 +25,6 @@ const Header = (props) => (
                 <h1>Habit Tracker</h1>
             </header>
         }
-
     </div>
 );  
 

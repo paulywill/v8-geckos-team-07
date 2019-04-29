@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import NewHabit from './NewHabit';
 import CheckIn from './check-in';
@@ -7,30 +6,25 @@ import CurrentHabit from './CurrentHabit';
 import Progress from './Progress';
 
 class Dashboard extends Component {
-    static propTypes = {
-        providerData: PropTypes.arrayOf(PropTypes.object).isRequired
-    };
-
-    static defaultProps = {
-        providerData: []
-    };
-
+    
     state = {
         providerData: this.props.providerData,
         newEntry: false,
         newEntryButton: true,
         habitData: [],
-        user: '',
+        user: "",
         hamburgerOpen: false,
         checkIn: false,
         habitExist: false,
+        data: [],
     };
 
-    /*
+    
     componentDidMount = () => {
-        this.updateProviders(this.state.providerData);
+        /*
         const user = this.state.providerData
         this.setState({ user: user[0].email })
+     
         axios.get('/api/habits/first-habit/' + user[0].email)
             .then(res => 
                 this.setState({ habitData: res.data.data }, () => {
@@ -40,51 +34,17 @@ class Dashboard extends Component {
             )
             .catch(error =>
                 console.log(error)
-            )
+            )            
+       */ 
+        }
+    
 
-    }
-
-
+    /*
     handleCurrentProviders = providerData => {
         this.updateProviders(providerData);
     };
-
-    updateProviders = providerData => {
-        let buttonList = { ...this.state.buttonList };
-
-        providerData.forEach(provider => {
-            const providerName = provider.providerId.split('.')[0];
-            buttonList = this.updateButtonList(buttonList, providerName, false);
-        });
-
-        this.setState({ buttonList, providerData });
-    };
-
-    /*
-    handleUnlinkedProvider = (providerName, providerData) => {
-        if (providerData.length < 1) {
-            auth
-                .getAuth()
-                .currentUser.delete()
-                .then(() => console.log('User Deleted'))
-                .catch(() => console.error('Error deleting user'));
-        }
-
-        let buttonList = { ...this.state.buttonList };
-        buttonList = this.updateButtonList(buttonList, providerName, true);
-
-        this.setState({ buttonList, providerData });
-    };
-     
-
-    updateButtonList = (buttonList, providerName, visible) => ({
-        ...buttonList,
-        [providerName]: {
-            ...buttonList[providerName],
-            visible
-        }
-    });
     */
+
 
 
     handleNewHabit = () => {
@@ -136,13 +96,18 @@ class Dashboard extends Component {
 
         return (
             <div id="content-wrap">
+                
                 <main {...this.state}>
-            
-                <h2>Daily Dashboard</h2>
-                {newHabitButton}
-                {checkInButton}
-                <Progress />
-                <CurrentHabit {...this.state.habitData} />
+
+                    
+                    <h2>Daily Dashboard</h2>
+                    
+                    
+                    
+                    {newHabitButton}
+                    {checkInButton}
+                    <Progress />
+                    <CurrentHabit {...this.state.habitData} />
                 </main>
             </div>
         );

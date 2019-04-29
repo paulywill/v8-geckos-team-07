@@ -1,6 +1,5 @@
 // React core.
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // Firebase.
 import firebase from 'firebase/app';
@@ -14,13 +13,8 @@ import './firebaseui-styling.global.css'; // Import globally.
 //Components
 import Header from './components/Header';
 import Login from './components/Login';
-
-//import HeaderSignedIn from './components/HeaderSignedIn';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
-
-// Get the Firebase config from the auto generated file.
-// *** REMOVED : just using auth from Firebase
 
 // Instantiate a Firebase app.
 const firebaseApp = firebase.initializeApp({
@@ -30,10 +24,6 @@ const firebaseApp = firebase.initializeApp({
 });
 
 class App extends Component {
-
-  static propTypes = {
-    providerData: PropTypes.arrayOf(PropTypes.object).isRequired
-  };
 
   state = {
     isSignedIn: undefined,
@@ -53,29 +43,18 @@ class App extends Component {
     },
   };
 
-  
-  /**
-   * @inheritDoc
-   */
   componentDidMount() {
     this.unregisterAuthObserver = firebaseApp.auth().onAuthStateChanged((user) => {
       this.setState({ isSignedIn: !!user });
       //User is signed in.
       console.info('User is signed in.');
-      this.setState({providerData: user.providerData})
-      
-      
+      this.setState({providerData: user.providerData})   
     });
   }
 
-  /**
-   * @inheritDoc
-   */
   componentWillUnmount() {
     this.unregisterAuthObserver();
   }
-
-  
 
   render() {
     return (
@@ -96,8 +75,8 @@ class App extends Component {
           //Signed in
           <div className={styles.signedIn} id="content-wrap">
             <Header providerData={this.state.providerData} />
-            <Dashboard />
-          <button><a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a></button>
+            <Dashboard providerData={this.state.providerData} />
+            <button><a className={styles.button} onClick={() => firebaseApp.auth().signOut()}>Sign-out</a></button>
             <Footer /> 
           </div>
         }   
