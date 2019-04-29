@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import NewHabit from './NewHabit';
+import NewHabitForm from './NewHabitForm';
 import CheckIn from './CheckIn';
 import CurrentHabit from './CurrentHabit';
 import Progress from './Progress';
@@ -16,14 +17,6 @@ class Dashboard extends Component {
         checkIn: false,
         habitExist: false
     };
-
-    //open check in form
-    handleCheckIn = () => {
-        this.setState((prevState) => ({
-            checkIn: !prevState.checkIn
-        }))
-    }
-
 
     //used componentDidUpdate due to async nature of firebase/props
     componentDidUpdate(prevProps) {
@@ -55,11 +48,20 @@ class Dashboard extends Component {
         this.setState({ checkIn: false })
     }
 
+
+    
     //toggle visibility of sidebar with Button
     hamburgerToggle = () => {
         this.setState((prevState) => ({
             hamburgerOpen: !prevState.hamburgerOpen
         }));
+    }
+
+    //open check in form
+    handleCheckIn = () => {
+        this.setState((prevState) => ({
+            checkIn: !prevState.checkIn
+        }))
     }
 
     //open check in form
@@ -75,7 +77,13 @@ class Dashboard extends Component {
                 <main>
                     <h1>Hello, {this.props.displayName}!</h1>
                     <p>Have a habit? : {this.state.habitExist.toString()}</p>
-                   
+                    {/* TESTING FORM  */}
+                    <NewHabitForm />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    {/* TESTING FORM  */}
                     {this.state.habitExist && 
                         <div>
                             <button className='habitButton' onClick={this.handleCheckIn}>Check In</button> 
@@ -99,7 +107,12 @@ class Dashboard extends Component {
 
                     <Progress />
                     <CurrentHabit {...this.state.habitData} />
+                
+                
+                
                 </main>
+
+
             </div>
         );
     }

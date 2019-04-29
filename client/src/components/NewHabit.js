@@ -26,12 +26,14 @@ class NewHabit extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.habit.length > 0 && this.state.length.length > 0 && this.state.intervals.length > 0 && this.state.intervals !== 'select'){
+        console.log((this.state.habit && this.state.length && this.state.intervals && this.state.intervals !== 'select'))
+        if (this.state.habit && this.state.length && this.state.intervals && this.state.intervals !== 'select'){
             this.setState({fieldsValid: true});    
-            const { name, habit, smart, length, intervals, date } = this.state;
-            axios.post('/api/habits/newhabit', { name, habit, smart, length, intervals, date })
+            const { habit, smart, length, intervals, date } = this.state;
+            console.log(this.props.email + { habit, smart, length, intervals, date })
+            axios.post('/api/habits/newhabit', this.props.email + {  habit, smart, length, intervals, date })
                 .then((result) => {
-                  console.log(result.data);
+                    console.log("result.data: " + result.data);
                   this.setState({habitData: result.data})  
                 })
                 .catch((error) => {
@@ -98,11 +100,11 @@ class NewHabit extends Component {
                         </label>
                         <label>
                             Habit:
-                    </label>
+                        </label>
                         <input type='text' name='habit' placeholder="Please enter new habit to be tracked" value={this.state.habit} onChange={this.onChange} />
                         <label>
                             Smart Goals: (OPTIONAL)
-                    </label>
+                        </label>
                         <input type='text' name='smart' placeholder="Please separate goals with commas"
                             value={this.state.smart} onChange={this.onChange} />
 
@@ -110,11 +112,11 @@ class NewHabit extends Component {
 
                         <label>
                             Length of Time to Track:
-                    </label>
+                        </label>
                         <input type='text' name='length' placeholder="Please enter time in months" value={this.state.length} onChange={this.onLengthChange} />
                         <label>
                             Daily Checkin Intervals:
-                    </label>
+                         </label>
                         <select name='intervals' value={this.state.intervals} onChange={this.onChange}>
                             <option value="select">Select One Option Please</option>
                             <option value="daily">Daily</option>
