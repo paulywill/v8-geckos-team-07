@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-//import NewHabit from './NewHabit';
+import NewHabit from './NewHabit';
 import CheckIn from './CheckIn';
 import CurrentHabit from './CurrentHabit';
 import Progress from './Progress';
@@ -14,16 +14,21 @@ class Dashboard extends Component {
         habitData: [],
         hamburgerOpen: false,
         checkIn: false,
-        habitExist: false,
+        habitExist: false
     };
 
+
+    handleCheckIn = () => {
+
+
+    }    
 
     //used componentDidUpdate due to async nature of firebase/props
     componentDidUpdate(prevProps) {
         if (this.props.email !== undefined && this.props.email !== prevProps.email) {
             // Do what you want with email
             const user = this.props.email
-            console.log("email is: " + user)
+            console.log("Dashboard - email is: " + user)
             
             axios.get('/api/habits/first-habit/' + user)
                 .then(res =>
@@ -76,6 +81,8 @@ class Dashboard extends Component {
 
         let checkInComp = null;
         let checkInButton = null;
+        
+        
         if (this.state.habitExist) {
             checkInComp = <CheckIn checkIn={this.state.checkIn}
                 habitId={this.state.habitData._id}
@@ -90,7 +97,10 @@ class Dashboard extends Component {
         
         return (
             <div>
-               
+                <NewHabit email={this.props.email}
+                    handleNewHabitSubmit={this.handleNewHabitSubmit}
+                    newEntry={this.state.newEntry} />
+                {checkInComp}
                 <main>
                     <h2>Daily Dashboard</h2>
                     {newHabitButton}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import HabitSubmission from './HabitSubmission';
 
 class NewHabit extends Component {
@@ -18,10 +17,12 @@ class NewHabit extends Component {
     }
 
     componentDidMount() {
-        const user = this.props.data
-        this.setState({ name: user[0].email })
-        console.log(user[0].email)
+        if (this.props.email !== undefined && this.props.email) {
+            const user = this.props.email
+            console.log("NewHabit email is: " + user)
+        }
     }
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -58,7 +59,6 @@ class NewHabit extends Component {
     }
 
     handleOkClick = () => {
-        // this.props.handleNewHabitData();
         this.handleSubmitButton();
         this.props.handleNewHabitSubmit(this.state.habitData);
         this.setState({habit: '', smart: [], length: '', intervals: ''})
@@ -70,6 +70,8 @@ class NewHabit extends Component {
     }
 
     render(){
+        
+
         let lenError = null
         if (this.state.lengthValid === false) {
             lenError = <p className="error">Please enter a number for length</p>
@@ -83,34 +85,34 @@ class NewHabit extends Component {
             fieldErr = null
         }
 
-
         const showModal = this.props.newEntry ? "modal display-block" : "modal display-none";
 
         return (
+            
             <div className={showModal}>
-            <div className="newHabit">
-                <form onSubmit={this.handleSubmit}>
-                    <label className="header">
-                    <h2>New Habit</h2>
+                <div className="newHabit">
+                    <form onSubmit={this.handleSubmit}>
+                        <label className="header">
+                            <h2>New Habit</h2>
+                        </label>
+                        <label>
+                            Habit:
                     </label>
-                    <label>
-                        Habit:
+                        <input type='text' name='habit' placeholder="Please enter new habit to be tracked" value={this.state.habit} onChange={this.onChange} />
+                        <label>
+                            Smart Goals: (OPTIONAL)
                     </label>
-                        <input type='text' name='habit' placeholder="Please enter new habit to be tracked"value={this.state.habit} onChange={this.onChange} />
-                    <label>
-                        Smart Goals: (OPTIONAL)
-                    </label>
-                        <input type='text' name='smart' placeholder="Please separate goals with commas" 
-                        value={this.state.smart} onChange={this.onChange} />
+                        <input type='text' name='smart' placeholder="Please separate goals with commas"
+                            value={this.state.smart} onChange={this.onChange} />
 
-                    <HabitSubmission handleOkClick={this.handleOkClick} submit={this.state.submit} />
+                        <HabitSubmission handleOkClick={this.handleOkClick} submit={this.state.submit} />
 
-                    <label>
-                        Length of Time to Track:
+                        <label>
+                            Length of Time to Track:
                     </label>
                         <input type='text' name='length' placeholder="Please enter time in months" value={this.state.length} onChange={this.onLengthChange} />
-                    <label>
-                        Daily Checkin Intervals:
+                        <label>
+                            Daily Checkin Intervals:
                     </label>
                         <select name='intervals' value={this.state.intervals} onChange={this.onChange}>
                             <option value="select">Select One Option Please</option>
@@ -120,16 +122,15 @@ class NewHabit extends Component {
                             <option value="biWeekly">Bi-Weekly</option>
                             <option value="monthly">Monthly</option>
                         </select>
-                    { lenError }
-                    { fieldErr }
-                    <div className="buttons">
-                        <button className="button" onClick={this.handleExitClick}>Exit</button>
-                        <input className="button" type="submit" value="Start Tracking" onClick={this.handleSubmitButton}/>
-                    </div>                   
-                </form>
+                        {lenError}
+                        {fieldErr}
+                        <div className="buttons">
+                            <button className="button" onClick={this.handleExitClick}>Exit</button>
+                            <input className="button" type="submit" value="Start Tracking" onClick={this.handleSubmitButton} />
+                        </div>
+                    </form>
+                </div>
             </div>
-            </div>
-
         )
     }
 }
