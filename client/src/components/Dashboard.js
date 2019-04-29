@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SocialProfileList from './SocialProfileList';
 import axios from 'axios';
 import NewHabit from './NewHabit';
 import CheckIn from './check-in';

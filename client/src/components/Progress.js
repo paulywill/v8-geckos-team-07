@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CalHM from '../components/CalHM';
+import CalHM from './widgets/CalHM';
 
 
 class Progress extends Component {
