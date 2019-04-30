@@ -6,6 +6,7 @@ import NewHabitForm from './NewHabitForm';
 import CheckIn from './CheckIn';
 import CurrentHabit from './CurrentHabit';
 import Progress from './Progress';
+import CheckInForm from './CheckInForm';
 
 class Dashboard extends Component {
     
@@ -27,7 +28,7 @@ class Dashboard extends Component {
                 .then(res =>                
                     this.setState({ habitData: res.data.data }, () => {
                         this.state.habitData ? this.setState({
-                            newEntry: false, newEntryButton: false
+                            habitExist: true, newEntry: false, newEntryButton: false
                         }) : this.setState({ newEntry: true, newEntryButton: true, habitExist: false })
                     })
                 )        
@@ -79,6 +80,7 @@ class Dashboard extends Component {
                     <p>Have a habit? : {this.state.habitExist.toString()}</p>
                     {/* TESTING FORM  */}
                     <NewHabitForm />
+                    <CheckInForm />
                     <br />
                     <br />
                     <br />
